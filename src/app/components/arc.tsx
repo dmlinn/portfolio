@@ -9,7 +9,7 @@ interface DonutChartProps {
 }
 
 const DonutChart: React.FC<DonutChartProps> = ({ completionPercentage, labelText, color='#efaf48' }) => {
-  const chartRef = useRef<SVGSVGElement | null>(null);
+  const chartRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const width = 50;
@@ -24,13 +24,13 @@ const DonutChart: React.FC<DonutChartProps> = ({ completionPercentage, labelText
       .attr('transform', `translate(${width / 2},${height / 2})`);
 
     // Define the pie layout
-    const pie = d3.pie()
+    const pie = d3.pie<{ value: number }>()
       .sort(null)
-      .value((d: { value: number }) => d.value);
+      .value(d => d.value);
 
     // Define the arc function
-    const arc = d3.arc()
-      .innerRadius(radius - 4)
+    const arc = d3.arc<d3.PieArcDatum<{ value: number }>>()
+      .innerRadius(radius - 40)
       .outerRadius(radius);
 
     // Data
@@ -53,7 +53,7 @@ const DonutChart: React.FC<DonutChartProps> = ({ completionPercentage, labelText
       .attrTween('d', function(d: d3.PieArcDatum<{ value: number }>) {
         const interpolate = d3.interpolate({ startAngle: 0, endAngle: 0 }, d);
         return function(t: number) {
-          return arc(interpolate(t));
+          return arc(interpolate(t)) || '';
         };
       });
 
