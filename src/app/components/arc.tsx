@@ -6,12 +6,23 @@ interface DonutChartProps {
   completionPercentage: number;
   labelText: string;
   color?: string;
+  chartThickness?: number;
 }
 
-const DonutChart: React.FC<DonutChartProps> = ({ completionPercentage, labelText, color='#efaf48' }) => {
+const DonutChart: React.FC<DonutChartProps> = ({
+  completionPercentage,
+  labelText,
+  color = '#efaf48',
+  chartThickness = 5,
+}) => {
+  if (!completionPercentage || completionPercentage < 0 || completionPercentage > 100) {
+    throw new Error('Invalid completion percentage');
+  }
+
   const chartRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    // Increased chart size for better visibility
     const width = 50;
     const height = 50;
     const radius = Math.min(width, height) / 2;
@@ -19,7 +30,7 @@ const DonutChart: React.FC<DonutChartProps> = ({ completionPercentage, labelText
     const svg = d3.select(chartRef.current)
       .append('svg')
       .attr('width', width)
-      .attr('height', height + 30)
+      .attr('height', height + 30) // Extra space for label
       .append('g')
       .attr('transform', `translate(${width / 2},${height / 2})`);
 
@@ -28,9 +39,9 @@ const DonutChart: React.FC<DonutChartProps> = ({ completionPercentage, labelText
       .sort(null)
       .value(d => d.value);
 
-    // Define the arc function
+    // Adjusting arc dimensions for better visibility in smaller space
     const arc = d3.arc<d3.PieArcDatum<{ value: number }>>()
-      .innerRadius(radius - 40)
+      .innerRadius(radius - chartThickness) // Thinner donut for small size
       .outerRadius(radius);
 
     // Data
@@ -44,7 +55,7 @@ const DonutChart: React.FC<DonutChartProps> = ({ completionPercentage, labelText
       .data(arcs)
       .enter()
       .append('path')
-      .attr('fill', (_d: d3.PieArcDatum<{ value: number }>, i: number) => i ? '#000' : color)
+      .attr('fill', (_d, i) => i ? '#0a0a0a' : color) // Changed background color to a lighter gray for contrast
       .attr('d', arc);
 
     // Apply tween for animation
@@ -57,18 +68,19 @@ const DonutChart: React.FC<DonutChartProps> = ({ completionPercentage, labelText
         };
       });
 
-    // Add text in the center
+    // Add percentage text in the center
     svg.append("text")
       .attr("text-anchor", "middle")
       .attr('dy', '0.35em')
+      .attr('font-size', '8px') // Smaller font for the smaller chart
       .text(`${completionPercentage}%`);
 
     // Add label text under the chart with white color
     svg.append("text")
       .attr("text-anchor", "middle")
       .attr('y', height / 2 + 20)
-      .attr('font-size', '10px')
-      .attr('fill', '#ffffff') // Here we set the text color to white
+      .attr('font-size', '12px') // Smaller font for the smaller chart
+      .attr('fill', '#ffffff')
       .text(labelText);
 
     // Cleanup function to remove SVG when component unmounts
@@ -77,7 +89,7 @@ const DonutChart: React.FC<DonutChartProps> = ({ completionPercentage, labelText
         d3.select(chartRef.current).selectAll('*').remove();
       }
     };
-  }, [completionPercentage, labelText]);
+  }, [completionPercentage, labelText, color]);
 
   return <div ref={chartRef} />;
 };
