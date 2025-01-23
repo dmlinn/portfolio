@@ -1,4 +1,5 @@
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function About() {
@@ -13,10 +14,15 @@ export default function About() {
         </p>
 
         <p>
+          <Image src="/cr-chart.png" alt="ControlRooms" width={800} height={400} />
+        </p>
+
+        <p>
           I architected a tool to quickly provide chart imagery to users who needed to be alerted of system-critical anomalies. This tool was built with Next.js and D3, and improved alert times dramatically over the old process using Puppeteer. To make this happen in a timely manner, I learned the basics of Azure and provisioned my own services.
         </p>
 
         <p>Technologies used: Next.js, React, D3, Azure, Typescript, HTML/CSS</p>
+
       </div>
     );
   }

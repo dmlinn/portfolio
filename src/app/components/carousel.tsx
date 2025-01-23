@@ -21,8 +21,8 @@ export default function DlCarousel() {
   const carouselItems: CarouselItem[] = [
     {
       image: "/charter.png",
-      alt: "Charter Spectrum",
-      title: "Charter Spectrum",
+      alt: "Charter/Spectrum",
+      title: "Charter/Spectrum",
       link: "/charter"
     },
     {
@@ -50,7 +50,7 @@ export default function DlCarousel() {
       link: "/gci"
     },
     {
-      image: "/miruni.png",
+      image: "/miruni-thumb.png",
       alt: "Miruni",
       title: "Miruni",
       link: "/miruni"
@@ -75,7 +75,7 @@ export default function DlCarousel() {
           align: "start",
           slidesToScroll: 1,
         }}
-        className="w-full"
+        className="ml-10 w-[555px]"
       >
         <CarouselContent className="-mt-1 w-[575px]">
           {carouselItems.map((item, index) => (
@@ -89,7 +89,7 @@ export default function DlCarousel() {
                   priority
                   className="object-cover w-40 h-40"
                 />
-                <div className="relative -top-40 h-44 pt-20" style={{backgroundColor: 'rgba(0,0,0,50%)'}}>
+                <div className="relative -top-40 h-44 pt-20 hover:opacity-0 animate" style={{backgroundColor: 'rgba(0,0,0,50%)'}}>
                   {item.title}
                 </div>
               </ConditionalLink>

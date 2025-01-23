@@ -1,15 +1,20 @@
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function About() {
     return (
       <div>
         <div className="flex flex-row gap-4 items-center">
-          <Link href="/"><ChevronLeftIcon className="h-5 w-5"/></Link><h1>Charter Communications</h1>
+          <Link href="/"><ChevronLeftIcon className="h-5 w-5"/></Link><h1>Charter/Spectrum</h1>
         </div>
 
         <p>
           Charter Communications tasked our team with taking their existing "Kite" design system across the finish line. I developed a number of user-facing Angular components, ranging from buttons to complex features, and was instrumental in building their automated component catalog.
+        </p>
+
+        <p>
+          <Image src="/kiteds.png" alt="ControlRooms" width={800} height={400} />
         </p>
 
         <p>

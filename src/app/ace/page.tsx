@@ -1,4 +1,5 @@
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function About() {
@@ -13,7 +14,11 @@ export default function About() {
         </p>
 
         <p>
-          This project blurred the lines for me between backend and frontend. I needed to frequently write and run AWS Lambda batch functions on DynamoDB data. There was also an intermediate data layer in the Next.js server components that saw me working with data contracts for features I was building. With twice-weekly deployments, it was truly all hands on deck, everywhere we could help.
+          <Image src="/ufa.png" alt="Ace Scholarships" width={800} height={400} />
+        </p>
+
+        <p>
+          This project blurred the lines for me between backend and frontend. I needed to frequently write and run AWS Lambda batch functions on DynamoDB data. There was also an intermediate data layer in the Next.js server components that saw me working with data contracts for features I was building. With twice-weekly deployments, it was truly all hands on deck, and I was able to help the team meet their deadlines frontend and backend.
         </p>
 
         <p>Technologies used: Next.js, AWS (DynamoDB, Lambda), Typescript, HTML/CSS</p>

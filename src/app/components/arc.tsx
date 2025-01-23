@@ -3,26 +3,23 @@ import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
 interface DonutChartProps {
-  completionPercentage: number;
+  years: number;
   labelText: string;
-  color?: string;
   chartThickness?: number;
 }
 
 const DonutChart: React.FC<DonutChartProps> = ({
-  completionPercentage,
+  years,
   labelText,
-  color = '#efaf48',
   chartThickness = 5,
 }) => {
-  if (!completionPercentage || completionPercentage < 0 || completionPercentage > 100) {
+  if (!years || years < 0 || years > 100) {
     throw new Error('Invalid completion percentage');
   }
 
   const chartRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    // Increased chart size for better visibility
     const width = 50;
     const height = 50;
     const radius = Math.min(width, height) / 2;
@@ -30,66 +27,89 @@ const DonutChart: React.FC<DonutChartProps> = ({
     const svg = d3.select(chartRef.current)
       .append('svg')
       .attr('width', width)
-      .attr('height', height + 30) // Extra space for label
+      .attr('height', height + 40)
       .append('g')
       .attr('transform', `translate(${width / 2},${height / 2})`);
 
-    // Define the pie layout
     const pie = d3.pie<{ value: number }>()
       .sort(null)
       .value(d => d.value);
 
-    // Adjusting arc dimensions for better visibility in smaller space
     const arc = d3.arc<d3.PieArcDatum<{ value: number }>>()
-      .innerRadius(radius - chartThickness) // Thinner donut for small size
+      .innerRadius(radius - chartThickness)
       .outerRadius(radius);
 
-    // Data
-    const data: Array<{ value: number }> = [{ value: completionPercentage }, { value: 100 - completionPercentage }];
+    const data = [{ value: years * 10 }, { value: 100 - years * 10 }];
 
-    // Generate the arcs
     const arcs = pie(data);
 
-    // Create a group for each arc
+    const colorInterpolator = d3.interpolate('#443114', '#d0983d');
+    const color = colorInterpolator(Math.min(years / 10, 1));
+
     const path = svg.selectAll('path')
       .data(arcs)
       .enter()
       .append('path')
-      .attr('fill', (_d, i) => i ? '#0a0a0a' : color) // Changed background color to a lighter gray for contrast
+      .attr('fill', (_d, i) => i ? '#0a0a0a' : color)
       .attr('d', arc);
 
-    // Apply tween for animation
     path.transition()
       .duration(750)
-      .attrTween('d', function(d: d3.PieArcDatum<{ value: number }>) {
+      .attrTween('d', function(d) {
         const interpolate = d3.interpolate({ startAngle: 0, endAngle: 0 }, d);
         return function(t: number) {
           return arc(interpolate(t)) || '';
         };
       });
 
-    // Add percentage text in the center
     svg.append("text")
       .attr("text-anchor", "middle")
       .attr('dy', '0.35em')
-      .attr('font-size', '8px') // Smaller font for the smaller chart
-      .text(`${completionPercentage}%`);
+      .attr('font-size', '12px')
+      .attr('fill', '#ffffff')
+      .text(`${years}`);
 
-    // Add label text under the chart with white color
+    // Function to wrap text
+    function wrap(text, width) {
+      text.each(function() {
+        let text = d3.select(this),
+            words = text.text().split(/\s+/).reverse(),
+            word,
+            line = [],
+            lineNumber = 0,
+            lineHeight = 1.1, // ems
+            y = text.attr("y"),
+            dy = parseFloat(text.attr("dy")) || 0, // Use 0 if dy is not a valid number
+            tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", `${dy}em`);
+
+        while (word = words.pop()) {
+          line.push(word);
+          tspan.text(line.join(" "));
+          if (tspan.node().getComputedTextLength() > width) {
+            line.pop();
+            tspan.text(line.join(" "));
+            line = [word];
+            tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", `${(++lineNumber * lineHeight + dy)}em`).text(word);
+          }
+        }
+      });
+    }
+
+    // Add label text with wrapping
     svg.append("text")
       .attr("text-anchor", "middle")
       .attr('y', height / 2 + 20)
-      .attr('font-size', '12px') // Smaller font for the smaller chart
+      .attr('font-size', '12px')
       .attr('fill', '#ffffff')
-      .text(labelText);
+      .text(labelText)
+      .call(wrap, width);
 
-    // Cleanup function to remove SVG when component unmounts
     return () => {
       if (chartRef.current) {
         d3.select(chartRef.current).selectAll('*').remove();
       }
     };
-  }, [completionPercentage, labelText, color]);
+  }, [years, labelText]);
 
   return <div ref={chartRef} />;
 };
