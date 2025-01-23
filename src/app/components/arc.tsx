@@ -70,12 +70,12 @@ const DonutChart: React.FC<DonutChartProps> = ({
       .text(`${years}`);
 
     // Function to wrap text
-    function wrap(text, width) {
+    const wrap: (selection: d3.Selection<SVGTextElement, unknown, null, undefined>, args_0: number) => void = (text, width) => {
       text.each(function() {
         let text = d3.select(this),
             words = text.text().split(/\s+/).reverse(),
             word,
-            line = [],
+            line: string[] = [],
             lineNumber = 0,
             lineHeight = 1.1, // ems
             y = text.attr("y"),
@@ -85,7 +85,7 @@ const DonutChart: React.FC<DonutChartProps> = ({
         while (word = words.pop()) {
           line.push(word);
           tspan.text(line.join(" "));
-          if (tspan.node().getComputedTextLength() > width) {
+          if (tspan.node()?.getComputedTextLength() || 0 > width) {
             line.pop();
             tspan.text(line.join(" "));
             line = [word];
