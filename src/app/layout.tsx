@@ -57,34 +57,32 @@ export default function RootLayout({
                 {children}
               </div>
 
-                <div className="flex flex-row gap-10 mt-14">
-                  <code className="text-xs">
+              <div className="flex flex-row gap-10 mt-14 width-full">
+                <code className="text-xs w-1/2">
+                  - Site meta -
+                  <ul>
+                    <li>Framework: Next.js (typescript)</li>
+                    <li>CSS: Tailwind</li>
+                    <li>Datavis: D3</li>
+                    <li>Hosting: AWS Amplify</li>
+                    <li>DNS: AWS Route 53</li>
+                    <li>Repository: GitHub</li>
+                  </ul>
+                </code>
 
-                    - Site meta -
-                    <ul>
-                      <li>Framework: Next.js (typescript)</li>
-                      <li>CSS: Tailwind</li>
-                      <li>Datavis: D3</li>
-                      <li>Hosting: AWS Amplify</li>
-                      <li>DNS: AWS Route 53</li>
-                      <li>Repository: GitHub</li>
-                    </ul>
-                  </code>
-                  <code className="text-xs">
-
-                    - Engineer data -
-                    <ul>
-                      <li>Contact: <a href="mailto:dmlinn@gmail.com">{"<dmlinn@gmail.com>"}</a></li>
-                      <li>Timezone: MST</li>
-                      <li>Location: <RefineGPSLocationComponent initialNorth={38.640492} initialWest={-106.110242} refinementTime={20000}/> (approx)</li>
-                      <li>Employer: <a href="https://www.cruxdigital.com/case-studies/">{"<Crux Digital>"}</a> & Self-Employed</li>
-                      <li>Experience: 10+ years</li>
-                      <li>Education: BA, Colorado State Univeristy</li>
-                      <li>Certs: AWS Cloud Practitioner</li>
-                    </ul>
-                  </code>
-                </div>
-
+                <code className="text-xs w-1/2">
+                  - Engineer data -
+                  <ul>
+                    <li>Contact: <a href="mailto:dmlinn@gmail.com">{"<dmlinn@gmail.com>"}</a></li>
+                    <li>Timezone: MST</li>
+                    <li>Location: <RefineGPSLocationComponent initialNorth={38.640492} initialWest={-106.110242} refinementTime={20000}/> (approx)</li>
+                    <li>Employer: <a href="https://www.cruxdigital.com/case-studies/">{"<Crux Digital>"}</a> & Self-Employed</li>
+                    <li>Experience: 10+ years</li>
+                    <li>Education: BA, Colorado State Univeristy</li>
+                    <li>Certs: AWS Cloud Practitioner</li>
+                  </ul>
+                </code>
+              </div>
             </div>
           </main>
         </div>

@@ -3,7 +3,7 @@ import RefineGPSLocationComponent from "@/app/components/gps";
 
 export default function Home() {
   return (
-    <div className="w-full">
+    <div className="w-full flex align-center justify-center">
       <DlCarousel />
     </div>
   );

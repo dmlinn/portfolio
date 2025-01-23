@@ -75,9 +75,8 @@ export default function DlCarousel() {
           align: "start",
           slidesToScroll: 2,
         }}
-        className="ml-10"
       >
-        <CarouselContent className="max-w-sm md:max-w-lg lg:max-w-lg">
+        <CarouselContent className="max-w-[20rem] md:max-w-lg lg:max-w-xl">
           {carouselItems.map((item, index) => (
             <CarouselItem key={index} className="object-cover h-32 text-center basis-1/1 lg:basis-1/5">
               <ConditionalLink href={item.link}>
