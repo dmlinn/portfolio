@@ -69,17 +69,17 @@ export default function DlCarousel() {
   };
 
   return (
-    <div>
+    <div className="flex">
       <Carousel
         opts={{
           align: "start",
-          slidesToScroll: 1,
+          slidesToScroll: 2,
         }}
-        className="ml-10 w-[555px]"
+        className="ml-10"
       >
-        <CarouselContent className="-mt-1 w-[575px]">
+        <CarouselContent className="max-w-sm md:max-w-lg lg:max-w-lg">
           {carouselItems.map((item, index) => (
-            <CarouselItem key={index} className="object-cover h-40 text-center">
+            <CarouselItem key={index} className="object-cover h-32 text-center basis-1/1 lg:basis-1/5">
               <ConditionalLink href={item.link}>
                 <Image
                   src={item.image}
@@ -87,9 +87,9 @@ export default function DlCarousel() {
                   width={320}
                   height={180}
                   priority
-                  className="object-cover w-40 h-40"
+                  className="object-cover w-32 h-32"
                 />
-                <div className="relative -top-40 h-44 pt-20 hover:opacity-0 animate" style={{backgroundColor: 'rgba(0,0,0,50%)'}}>
+                <div className="relative -top-40 w-32 h-44 pt-20 hover:opacity-0 animate" style={{backgroundColor: 'rgba(0,0,0,50%)'}}>
                   {item.title}
                 </div>
               </ConditionalLink>

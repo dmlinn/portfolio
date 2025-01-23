@@ -40,7 +40,7 @@ const RefineGPSLocationComponent: React.FC<Props> = ({ initialNorth, initialWest
       });
     };
 
-    intervalId = setInterval(updateLocation, 500); // Update every half second
+    intervalId = setInterval(updateLocation, 1000); // Update every half second
 
     return () => {
       clearInterval(intervalId);
@@ -48,7 +48,7 @@ const RefineGPSLocationComponent: React.FC<Props> = ({ initialNorth, initialWest
   }, [initialNorth, initialWest, refinementTime]);
 
   return (
-    <span> {currentLocation.latitude.toFixed(6)}, Lon: {currentLocation.longitude.toFixed(6)}</span>
+    <span> {currentLocation.latitude.toFixed(6)} {currentLocation.longitude.toFixed(6)}</span>
   );
 };
 
