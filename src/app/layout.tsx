@@ -3,6 +3,7 @@ import Image from "next/image";
 import DonutChart from "@/app/components/arc";
 import Link from "next/link";
 import RefineGPSLocationComponent from "@/app/components/gps";
+import Tooltip from "@/app/components/tooltip";
 
 export default function RootLayout({
   children,
@@ -85,8 +86,13 @@ export default function RootLayout({
                     </ul>
                   </code>
                 </div>
-                <code className="text-xs w-1/2">
-                  - Non-professional ventures: 🧑‍🧑‍🧒‍🧒 🛞 🫎 🪓 ⛺️
+                <code className="text-xs w-1/2 m-auto text-center">
+                  - Non-professional ventures -<br/>
+                  <Tooltip text="Family">👨‍👩‍👧‍👧</Tooltip>&nbsp;
+                  <Tooltip text="Garage & Land Cruisers">🛞</Tooltip>&nbsp;
+                  <Tooltip text="Protien Acquisition">🫎</Tooltip>&nbsp;
+                  <Tooltip text="BTU Acquisition & Processing">🪓</Tooltip>&nbsp;
+                  <Tooltip text="Camping & Exploration">⛺️</Tooltip>
                 </code>
               </div>
             </div>
