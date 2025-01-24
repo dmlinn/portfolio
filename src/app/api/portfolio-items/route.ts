@@ -6,37 +6,37 @@ const portfolioItems: PortfolioItem[] = [
     image: '/charter.png',
     alt: 'Charter/Spectrum',
     title: 'Charter/Spectrum',
-    link: '/charter',
+    link: '/pages/charter',
   },
   {
     image: '/ace.png',
     alt: 'Ace Scholarships',
     title: 'Ace Scholarships',
-    link: '/ace',
+    link: '/pages/ace',
   },
   {
     image: '/controlrooms.png',
     alt: 'ControlRooms',
     title: 'ControlRooms',
-    link: '/controlrooms',
+    link: '/pages/controlrooms',
   },
   {
     image: '/ta.png',
     alt: 'Transamerica',
     title: 'Transamerica',
-    link: '/transamerica',
+    link: '/pages/transamerica',
   },
   {
     image: '/gci.png',
     alt: 'GCI',
     title: 'GCI',
-    link: '/gci',
+    link: '/pages/gci',
   },
   {
     image: '/miruni-thumb.png',
     alt: 'Miruni',
     title: 'Miruni',
-    link: '/miruni',
+    link: '/pages/miruni',
   },
 ];
 
