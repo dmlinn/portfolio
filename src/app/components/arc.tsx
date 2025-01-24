@@ -99,7 +99,7 @@ const DonutChart: React.FC<DonutChartProps> = ({
     svg.append("text")
       .attr("text-anchor", "middle")
       .attr('y', height / 2 + 4)
-      .attr('font-size', '12px')
+      .attr('font-size', '13px')
       .attr('fill', '#ffffff')
       .text(labelText)
       .call(wrap, width);
