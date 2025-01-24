@@ -1,4 +1,6 @@
-import RefineGPSLocationComponent from "@/app/components/gps";
+'use client';
+
+import { PortfolioItem } from "@/app/types/types";
 import {
   Carousel,
   CarouselContent,
@@ -8,54 +10,27 @@ import {
 } from "@/components/ui/carousel"
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
-interface CarouselItem {
-  image: string;
-  alt: string;
-  title: string;
-  link?: string;
-}
+const DlCarousel = () => {
+  const [portfolioItems, setPortfolioItems] = useState<PortfolioItem[]>([]);
 
-export default function DlCarousel() {
-  const carouselItems: CarouselItem[] = [
-    {
-      image: "/charter.png",
-      alt: "Charter/Spectrum",
-      title: "Charter/Spectrum",
-      link: "/charter"
-    },
-    {
-      image: "/ace.png",
-      alt: "Ace Scholarships",
-      title: "Ace Scholarships",
-      link: "/ace"
-    },
-    {
-      image: "/controlrooms.png",
-      alt: "ControlRooms",
-      title: "ControlRooms",
-      link: "/controlrooms"
-    },
-    {
-      image: "/ta.png",
-      alt: "Transamerica",
-      title: "Transamerica",
-      link: "/transamerica"
-    },
-    {
-      image: "/gci.png",
-      alt: "GCI",
-      title: "GCI",
-      link: "/gci"
-    },
-    {
-      image: "/miruni-thumb.png",
-      alt: "Miruni",
-      title: "Miruni",
-      link: "/miruni"
-    },
-  ];
+  useEffect(() => {
+    const fetchPortfolioItems = async () => {
+      try {
+        const response = await fetch('/api/portfolio-items');
+        if (!response.ok) {
+          throw new Error('Failed to fetch portfolio items');
+        }
+        const data = await response.json();
+        setPortfolioItems(data);
+      } catch (error) {
+        console.error('Error fetching portfolio items:', error);
+      }
+    };
+
+    fetchPortfolioItems();
+  }, []);
 
   const ConditionalLink: React.FC<{ children: ReactNode[]; href?: string }> = ({ children, href }) => {
     if (href) {
@@ -77,7 +52,7 @@ export default function DlCarousel() {
         }}
       >
         <CarouselContent className="max-w-[20rem] md:max-w-lg lg:max-w-xl">
-          {carouselItems.map((item, index) => (
+          {portfolioItems.map((item: PortfolioItem, index: number) => (
             <CarouselItem key={index} className="object-cover h-32 text-center basis-1/1 lg:basis-1/5">
               <ConditionalLink href={item.link}>
                 <Image
@@ -101,3 +76,5 @@ export default function DlCarousel() {
     </div>
   );
 }
+
+export default DlCarousel;
