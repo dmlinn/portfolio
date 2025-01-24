@@ -5,9 +5,9 @@ export default function About() {
     return (
       <div>
         <div className="flex flex-row gap-4 items-center">
-          <Link href="/"><ChevronLeftIcon className="h-5 w-5"/></Link>
-          <h1>GCI - Senior Frontend Engineer</h1><Link href="/">
-          <ChevronRightIcon className="h-5 w-5"/></Link>
+          <Link href="/pages/transamerica"><ChevronLeftIcon className="h-5 w-5"/></Link>
+          <h1>GCI - Senior Frontend Engineer</h1>
+          <Link href="/pages/miruni"><ChevronRightIcon className="h-5 w-5"/></Link>
         </div>
 
         <p>

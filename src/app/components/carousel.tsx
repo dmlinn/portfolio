@@ -8,6 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactNode, useEffect, useState } from "react";
@@ -32,7 +33,7 @@ const DlCarousel = () => {
     fetchPortfolioItems();
   }, []);
 
-  const ConditionalLink: React.FC<{ children: ReactNode[]; href?: string }> = ({ children, href }) => {
+  const ConditionalLink: React.FC<{ children: ReactNode; href?: string }> = ({ children, href }) => {
     if (href) {
       return (
         <Link href={href}>
@@ -41,6 +42,28 @@ const DlCarousel = () => {
       );
     }
     return children;
+  };
+
+  const ImageWithLoader = ({ src, alt, width, height, className }: { src: string, alt: string, width: number, height: number, className: string }) => {
+    const [imageLoaded, setImageLoaded] = useState(false);
+
+    return (
+      <div className={className}>
+        {!imageLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Loader2 className="animate-spin h-10 w-10" />
+          </div>
+        )}
+        <Image
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          onLoadingComplete={() => setImageLoaded(true)}
+          className={`object-cover w-full h-full ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+        />
+      </div>
+    );
   };
 
   return (
@@ -55,16 +78,17 @@ const DlCarousel = () => {
           {portfolioItems.map((item: PortfolioItem, index: number) => (
             <CarouselItem key={index} className="object-cover h-32 text-center basis-1/1 lg:basis-1/5">
               <ConditionalLink href={item.link}>
-                <Image
-                  src={item.image}
-                  alt={item.alt}
-                  width={320}
-                  height={180}
-                  priority
-                  className="object-cover w-32 h-32"
-                />
-                <div className="relative -top-40 w-32 h-44 pt-20 hover:opacity-0 animate" style={{backgroundColor: 'rgba(0,0,0,50%)'}}>
-                  {item.title}
+                <div className="relative w-32 h-32">
+                  <ImageWithLoader
+                    src={item.image}
+                    alt={item.alt}
+                    width={320}
+                    height={180}
+                    className="object-cover w-32 h-32"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center text-white text-sm font-bold bg-black bg-opacity-50 opacity-100 hover:opacity-0 transition-opacity duration-300">
+                    {item.title}
+                  </div>
                 </div>
               </ConditionalLink>
             </CarouselItem>

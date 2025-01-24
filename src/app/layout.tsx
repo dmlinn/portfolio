@@ -21,7 +21,7 @@ export default function RootLayout({
 
                   <div>
                     <h2 className="font-black">Senior Frontend Engineer</h2>
-                    <p>I'm a Senior Frontend Engineer with fullstack experience. I've worked on several high-profile design systems either as a senior engineer or team lead. I've been in a agency-type setting for much of my career, and excel at jumping in to unfamiliar code bases and quick delivery. </p>
+                    <p>I'm a senior frontend engineer with fullstack experience. I've worked on several high-profile design systems either as a senior engineer or team lead. I've been in a agency-type setting for much of my career, and excel at jumping in to unfamiliar code bases and quick delivery. </p>
                   </div>
                   <div className="rounded-full overflow-hidden w-36 h-36 text-center flex-shrink-0">
                     <Image
@@ -58,17 +58,6 @@ export default function RootLayout({
               </div>
 
               <div className="flex flex-row gap-10 mt-14 width-full">
-                <code className="text-xs w-1/2">
-                  - Site meta -
-                  <ul>
-                    <li>Framework: Next.js (typescript)</li>
-                    <li>CSS: Tailwind</li>
-                    <li>Datavis: D3</li>
-                    <li>Hosting: AWS Amplify</li>
-                    <li>DNS: AWS Route 53</li>
-                    <li>Repository: GitHub</li>
-                  </ul>
-                </code>
 
                 <code className="text-xs w-1/2">
                   - Engineer data -
@@ -80,6 +69,18 @@ export default function RootLayout({
                     <li>Experience: 10+ years</li>
                     <li>Education: BA, Colorado State Univeristy</li>
                     <li>Certs: AWS Cloud Practitioner</li>
+                  </ul>
+                </code>
+
+                <code className="text-xs w-1/2">
+                  - Site meta -
+                  <ul>
+                    <li>Framework: Next.js (typescript)</li>
+                    <li>CSS: Tailwind</li>
+                    <li>Datavis: D3</li>
+                    <li>Hosting: AWS Amplify</li>
+                    <li>DNS: AWS Route 53</li>
+                    <li>Repository: GitHub</li>
                   </ul>
                 </code>
               </div>
