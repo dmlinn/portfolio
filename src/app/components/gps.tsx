@@ -9,7 +9,7 @@ interface GPSLocation {
 interface Props {
   initialNorth: number;
   initialWest: number;
-  refinementTime: number; // in milliseconds
+  refinementTime: number;
 }
 
 const RefineGPSLocationComponent: React.FC<Props> = ({ initialNorth, initialWest, refinementTime }) => {
@@ -40,7 +40,7 @@ const RefineGPSLocationComponent: React.FC<Props> = ({ initialNorth, initialWest
       });
     };
 
-    intervalId = setInterval(updateLocation, 1000); // Update every half second
+    intervalId = setInterval(updateLocation, 1000);
 
     return () => {
       clearInterval(intervalId);

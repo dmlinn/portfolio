@@ -10,11 +10,15 @@ export default function About() {
         </div>
 
         <p>
-          I merged two chrome extensions written by two different dev teams to make miruni, a bug documentation and screen recording tool. In a perfect storm, Google had also mandated that extensions be upgraded to Manifest V3, without providing sufficient documentation or support for the migration. I was able to successfully upgrade the extensions to V3, even though it took some trickery with background tabs and a lot of trial and error. The extension is being used today by users of both the original extensions.
+          I merged two chrome extensions written by two different dev teams to make miruni, a bug documentation and screen recording tool. In a perfect storm, Google had also mandated that extensions be upgraded to Manifest V3, without providing sufficient documentation or support for the migration.
         </p>
 
         <p>
           <Image src="/miruni.png" alt="Miruni" width={800} height={400} />
+        </p>
+
+        <p>
+          I was able to successfully upgrade the extensions to V3, even though it took some trickery with background tabs and a lot of trial and error. The extension is being used today by users of both the original extensions.
         </p>
 
         <p>
